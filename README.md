@@ -1,7 +1,7 @@
 # wisdom
 ## 最小可用的虚拟dom库
 ******
-### Dom相关知识点整理
+### DOM相关知识点整理
 ##### 节点关系图
 ![nodes](./assets/nodes.jpg)
 
@@ -9,8 +9,8 @@
 |  节点类型   | nodeType | nodeName |
 |---|---|---|
 | 元素节点  |1| 'DIV'只读 |
-| 文本节点  |3|'#text'|
 | 属性节点  |2||
+| 文本节点  |3|'#text'|
 | 注释节点 |8|'#comment'|
 | document |9|'#docment'|
 | DocumentFragment | 11|
@@ -45,4 +45,30 @@
 	element.insertBefore(newChild,existingChild)	// 现有的子元素之前插入一个新的子元素
 	element.removeAttribute('style')	// 从元素中删除指定的属性
 	element.innerHTML	// 设置或者返回元素的内容。
+```
+
+##### Virtual DOM概念
+``` javascript
+	// Virtual DOM 是JS对象，并且最少包含 tag、props 和 children, text而选一， 三个属性，用来描述真实的DOM
+	{
+		"tag": "ol",
+		"props":{},
+		"children": [
+			{
+				"tag": "li",
+				"props":
+				{
+					"id": "li1",
+				},
+				"text": "hello world"
+			}
+		]
+	}
+```
+##### Children diff 算法
+``` javascript
+	// 遍历 oldChildren 用对象缓存
+	// 遍历 newChildren每项，命中patch，并删除对象中的整条数据
+	// 没命中 oldChildren 新建此项(之前一次都没有命中过，新建的此项存在内存中，否则就 oldChildren 中 insertAfter)
+	// 遍历完成 对象剩下的数据删除
 ```
